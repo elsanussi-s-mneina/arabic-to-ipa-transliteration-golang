@@ -1,15 +1,13 @@
-package main
+package transliteration
 
-import (
-	"strings"
-	"testing"
-)
+import "strings"
 
 // indices into transliteration table
 const ARABIC int = 0
 const IPA int = 1
 
 var transliterationTable = [][2]string{
+	{"ا", "aː"},
 	{"أ", "ʔ"},
 	{"إ", "ʔ"},
 	{"ء", "ʔ"},
@@ -76,22 +74,3 @@ func TransliterateArabicToIPA(arabicText string) string {
 	}
 	return result
 }
-
-func TestTransliterateArabicToIPA(t *testing.T) {
-	tests := []struct {
-		arabicText string
-		want       string
-	}{
-		{arabicText: "شجرة", want: "ʃd͜ʒrt"},
-		{arabicText: "أ", want: "ʔ"},
-		{arabicText: "ب", want: "b"},
-		{arabicText: "ت", want: "t"},
-		{arabicText: "ثلج كثير", want: "θld͜ʒ kθjr"},
-	}
-	for _, tt := range tests {
-		if got := TransliterateArabicToIPA(tt.arabicText); got != tt.want {
-			t.Errorf("TransliterateArabicToIPA(%v) = %v, want %v", tt.arabicText, got, tt.want)
-		}
-	}
-}
-
